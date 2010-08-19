@@ -6,11 +6,35 @@ INSTALLATION
 
 To install this module, run the following commands:
 
-    perl Build.PL
-    ./Build
-    ./Build test
-    ./Build install
+    perl Makefile.PL
+    make
+    make test
+    make install
 
+Data::Tabulate aims to simplify the generation of tables. Often you don't have
+tables like in databases (with header and several rows of data), but tables with
+content only (like image galleries or listings displayed as tables).
+
+You can use other modules (e.g. HTML::Table) to produce specific output.
+
+Perhaps a little code snippet.
+
+    use Data::Tabulate;
+    use Data::Dumper;
+    
+    my @array = qw(1..12);
+    
+    my $foo   = Data::Tabulate->new();
+    my @table = $foo->tabulate(@array);
+
+returns
+
+    (
+        [  1,  2,  3 ],
+        [  4,  5,  6 ],
+        [  7,  8,  9 ],
+        [ 10, 11, 12 ]
+    )
 
 SUPPORT AND DOCUMENTATION
 
@@ -21,16 +45,16 @@ After installing, you can find documentation for this module with the perldoc co
 You can also look for information at:
 
     Search CPAN
-        http://search.cpan.org/dist/Data::Tabulate
+        http://search.cpan.org/dist/Data-Tabulate
 
     CPAN Request Tracker:
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Data::Tabulate
+        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Data-Tabulate
 
     AnnoCPAN, annotated CPAN documentation:
-        http://annocpan.org/dist/Data::Tabulate
+        http://annocpan.org/dist/Data-Tabulate
 
     CPAN Ratings:
-        http://cpanratings.perl.org/d/Data::Tabulate
+        http://cpanratings.perl.org/d/Data-Tabulate
 
 COPYRIGHT AND LICENCE
 

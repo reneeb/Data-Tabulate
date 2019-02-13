@@ -21,12 +21,17 @@ Perhaps a little code snippet.
     use Data::Tabulate;
     use Data::Dumper;
     
-    my @array = qw(1..12);
+    my @array = (1..12);
     
     my $foo   = Data::Tabulate->new();
     my @table = $foo->tabulate(@array);
     
-    my $html  = $foo->render('HTMLTable',@array);
+    my $html1 = $foo->render('HTMLTable', { data => \@array });
+    my $html2 = $foo->render('HTMLTable', { data => @table  });
+
+    print Dumper({ 'html with raw array data' => $html1,
+                   'html with tabulate data'  => $html2 });
+
 
 =head1 METHODS
 

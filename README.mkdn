@@ -1,0 +1,173 @@
+[![Build Status](https://travis-ci.org/reneeb/Data-Tabulate.svg?branch=master)](https://travis-ci.org/reneeb/Data-Tabulate)
+[![Kwalitee status](http://cpants.cpanauthors.org/dist/Data-Tabulate.png)](http://cpants.charsbar.org/dist/overview/Data-Tabulate)
+[![GitHub issues](https://img.shields.io/github/issues/reneeb/Data-Tabulate.svg)](https://github.com/reneeb/Data-Tabulate/issues)
+
+# NAME
+
+Data::Tabulate - Table generation!
+
+# VERSION
+
+version 0.07
+
+# SYNOPSIS
+
+`Data::Tabulate` aims to simplify the generation of tables. Often you don't have
+tables like in databases (with header and several rows of data), but tables with
+content only (like image galleries or listings displayed as tables).
+
+You can use other modules (e.g. HTML::Table) to produce specific output.
+
+Perhaps a little code snippet.
+
+    use Data::Tabulate;
+    use Data::Dumper;
+    
+    my @array = qw(1..12);
+    
+    my $foo   = Data::Tabulate->new();
+    my @table = $foo->tabulate(@array);
+    
+    my $html  = $foo->render('HTMLTable',@array);
+
+# METHODS
+
+## new
+
+create a new object of `Data::Tabulate`.
+
+## render ( $plugin, {data => \\@array \[, attr => {%hash}\]} )
+
+This methods loads the Plugin _$plugin_ and renders the table with the plugin.
+
+Example:
+
+    my $html_table = $tabulator->render('HTMLTable',{data => [1..10]});
+
+loads the module `Data::Tabulate::Plugin::HTMLTable` and returns this string:
+
+    <table>
+    <tr><td>1</td><td>2</td><td>3</td></tr>
+    <tr><td>4</td><td>5</td><td>6</td></tr>
+    <tr><td>7</td><td>8</td><td>9</td></tr>
+    <tr><td>10</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    </table>
+
+You can write your own plugins.
+
+## tabulate( @array )
+
+This methods creates an array of arrays that can be used to render a table
+or you can do your own thing with the array.
+
+    my @array = $tabulator->tabulate(1..10);
+
+returns
+
+    (
+      [ 1,     2,     3 ],
+      [ 4,     5,     6 ],
+      [ 7,     8,     9 ],
+      [10, undef, undef ],
+    )
+
+## fill\_with
+
+if the array doesn't provide enough elements the table is filled with 'undef' elements
+sometimes this is not the wanted behaviour. So you can change the value that is used
+to fill the array.
+
+    $obj->fill_with( 'hi' );
+
+for an example see t/04\_fill\_with.t
+
+## cols
+
+returns the number of columns the table has
+
+## rows
+
+returns the number of rows the table has
+
+## max\_columns
+
+set how many columns the table can have (at most).
+
+    $tabulator->max_columns(3);
+
+the table has at most three columns
+
+## min\_columns
+
+set how many columns the table can have (at least).
+
+    $tabulator->min_columns(3);
+
+the table has at least three columns
+
+## do\_func($module, $method, @params)
+
+If you need to call some methods of the rendering object, you can use this
+method, to prepare these method calls.
+
+## reset\_func( $module )
+
+reset the method call preperations
+
+
+
+# Development
+
+The distribution is contained in a Git repository, so simply clone the
+repository
+
+```
+$ git clone http://github.com/reneeb/Data-Tabulate.git
+```
+
+and change into the newly-created directory.
+
+```
+$ cd Data-Tabulate
+```
+
+The project uses [`Dist::Zilla`](https://metacpan.org/pod/Dist::Zilla) to
+build the distribution, hence this will need to be installed before
+continuing:
+
+```
+$ cpanm Dist::Zilla
+```
+
+To install the required prequisite packages, run the following set of
+commands:
+
+```
+$ dzil authordeps --missing | cpanm
+$ dzil listdeps --author --missing | cpanm
+```
+
+The distribution can be tested like so:
+
+```
+$ dzil test
+```
+
+To run the full set of tests (including author and release-process tests),
+add the `--author` and `--release` options:
+
+```
+$ dzil test --author --release
+```
+
+# AUTHOR
+
+Renee Baecker <module@renee-baecker.de>
+
+# COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2015 by Renee Baecker.
+
+This is free software, licensed under:
+
+    The Artistic License 2.0 (GPL Compatible)

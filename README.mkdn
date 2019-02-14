@@ -8,7 +8,7 @@ Data::Tabulate - Table generation!
 
 # VERSION
 
-version 0.08
+version 0.09
 
 # SYNOPSIS
 
@@ -32,9 +32,9 @@ Perhaps a little code snippet.
     my @table = $foo->tabulate(@array);
     my $html2 = $foo->render('HTMLTable');
 
-    print Dumper({ 
+    print Dumper({
         'html with raw array data' => $html1,
-        'html with tabulate data'  => $html2, 
+        'html with tabulate data'  => $html2,
     });
 
 # METHODS

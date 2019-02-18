@@ -205,7 +205,7 @@ to fill the array.
 
   $obj->fill_with( 'hi' );
 
-for an example see t/04_fill_with.t
+for an example see L<"t/04_fill_with.t"|https://github.com/reneeb/Data-Tabulate/blob/master/t/04_fill_with.t>.
 
 =cut
 

@@ -14,7 +14,7 @@ C<Data::Tabulate> aims to simplify the generation of tables. Often you don't hav
 tables like in databases (with header and several rows of data), but tables with
 content only (like image galleries or listings displayed as tables).
 
-You can use other modules (e.g. L<HTML::Table>) to produce specific output.
+You can use other plugin modules (e.g. L<HTMLTable|Data::Tabulate::Plugin::HTMLTable>) to produce specific output.
 
 Perhaps a little code snippet.
 
@@ -63,7 +63,7 @@ Example:
 
     my $html_table = $tabulator->render('HTMLTable',{data => [1..10]});
 
-loads the module C<Data::Tabulate::Plugin::HTMLTable> and returns this string:
+loads the module L<Data::Tabulate::Plugin::HTMLTable> and returns this string:
 
   <table>
   <tr><td>1</td><td>2</td><td>3</td></tr>
@@ -317,6 +317,18 @@ sub _load_module {
     eval "use $module";
     croak "could not load $module" if $@; 
 }
+
+=head1 SEE ALSO
+
+=over 4
+
+=item * L<Data::Tabulate::Plugin::HTMLTable>
+
+=item * L<Data::Tabulate::Plugin::ASCIITable>
+
+=back
+
+=cut
 
 1; # End of Data::Tabulate
 
